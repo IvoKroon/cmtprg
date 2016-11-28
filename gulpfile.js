@@ -9,7 +9,7 @@ gulp.task('default', function(){
         script: 'app.js',
         ext: 'js',
         env:{
-            PORT:80
+            PORT:8000
         },
         ignore: ['./node_modules/**']
     })
