@@ -6,7 +6,12 @@ var express = require("express"),
     bodyParser = require("body-parser");
 
 //makes connection if there is no connection it makes the connection.
-var db = mongoose.connect("mongodb://localhost/bookApi");
+var db;
+    if(process.env.ENV == 'Test'){
+        db = mongoose.connect('mongodb://localhost/bookApi_test');
+    }else{
+        db = mongoose.connect('mongodb://localhost/bookApi');
+    }
 
 var Book = require('./models/bookModel');
 
@@ -38,3 +43,5 @@ app.get('/', function (req, res) {
 app.listen(port, function () {
     console.log("Running on PORT " + port);
 });
+
+module.exports = app;

@@ -3,38 +3,31 @@ var express = require('express');
 var routes = function (Book) {
     var bookRouter = express.Router();
 
+    var bookController = require("../controller/bookController")(Book);
+    var bookDetailController = require("../controller/bookDetailController")(Book);
+
     bookRouter.route('/')
-        .post(function (req, res) {
-            var book = new Book(req.body);
+        .post(bookController.post)
+        .get(bookController.get);
 
-            book.save();
-            console.log(book);
-            res.status(201).send(book);
-
-        })
-        .get(function (req, res) {
-
-            var query = {};
-            if (req.query.genre) {
-                query.genre = req.query.genre;
+    bookRouter.use('/:bookId', function (req,res,next) {
+        Book.findById(req.params.bookId, function (err, book) {
+            if (err)
+                res.status(500).send(err);
+            else if(book) {
+                req.book = book;
+                next();
+            }else{
+                res.status(404).send("No book found!");
             }
-            Book.find(query, function (err, books) {
-                if (err)
-                    res.status(500).send(err);
-                else
-                    res.json(books);
-            });
-        });
+        })
+    });
 
     bookRouter.route('/:bookId')
-        .get(function (req, res) {
-            Book.findById(req.params.bookId, function (err, book) {
-                if (err)
-                    res.status(500).send(err);
-                else
-                    res.json(book);
-            });
-        });
+        .get(bookDetailController.get)
+        .put(bookDetailController.put)
+        .patch(bookDetailController.patch)
+        .delete(bookDetailController.delete);
 
     return bookRouter;
 
