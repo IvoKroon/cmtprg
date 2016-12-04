@@ -10,13 +10,11 @@ var routes = function (Book) {
         .post(bookController.post)
         .get(bookController.get)
         .options(function (req, res) {
-            var option = new Object();
+            var option = {};
+            console.log(req);
             option.Get = "Get all the books";
             option.Post = "Make a new book";
             res.setHeader('Allow-header','application/json');
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
             res.json(option);
         });
 

@@ -5,38 +5,19 @@ var bookDetailController = function (Book) {
         var selfLink = 'http://' + req.headers.host + '/api/books/'+returnBook._id;
         // var genreLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
         var collectionLink = 'http://' + req.headers.host + '/api/books/';
-        // returnBook._links = [];
-        // var href = {"href":selfLink};
-        // var links = {"self":href};
-        // // var FilterByThisGenre = {};
-        // returnBook._links.push(links);
-        // returnBook._links.push(genre);
-        // returnBook._links.self.href = selfLink;
-
-        // returnBook._links.FilterByThisGenre = genreLink.replace(' ', '%20');
         returnBook._links = {};
         returnBook._links.self = {};
         returnBook._links.self.href = selfLink;
         returnBook._links.collection = {};
         returnBook._links.collection = collectionLink;
-        // collection
-        // returnBook._link.self = {};
-        // returnBook._links.self.href = selfLink;
         res.json(returnBook);
     };
 
     var put = function (req, res) {
-        // for(var p in req.body){
-        //     // req.book[p] = req.body[p];
-        //     if(req.book[p]){
-        //
-        //     }
-        // }
-        // if(req.book.title && req.book.author && req.book.genre && req.book.read) {
+        if(req.body.title && req.body.author && req.body.genre) {
             req.book.title = req.body.title;
             req.book.author = req.body.author;
             req.book.genre = req.body.genre;
-            req.book.read = req.body.read;
 
             req.book.save(function (err) {
                 if (err)
@@ -45,10 +26,10 @@ var bookDetailController = function (Book) {
                     res.json(req.book);
                 }
             });
-        // }else{
-        //     var err = "A field is empty";
-        //     res.status(304).send(err);
-        // }
+        }else{
+            var err = "A field is empty";
+            res.status(304).send(err);
+        }
 
 
 
@@ -80,12 +61,12 @@ var bookDetailController = function (Book) {
     };
 
     var options = function (req, res) {
-        var options = new Object();
+        var options = {};
         options.Get = "Get one resource by given id";
         options.Put = "Update a part of the resourse";
         options.Delete = "Remove the resourse";
         options.Patch = "Update the full resourse";
-        res.json(req)
+        res.json(options)
     };
 
     return {
