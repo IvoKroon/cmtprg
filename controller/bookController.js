@@ -36,6 +36,7 @@ var bookController = function(Book){
                 var items = new Object();
                 items.items = returnBooks;
                 items._links = {};
+                items._links.self = {}
                 items._links.self.href = 'http://' + req.headers.host + '/api/books/';
                 items.pagination = {"currentPage":"1"};
                 // <currentPage>1</currentPage>
