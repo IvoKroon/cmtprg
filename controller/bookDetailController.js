@@ -2,9 +2,14 @@ var bookDetailController = function (Book) {
     var get = function (req, res) {
         var returnBook = req.book.toJSON();
 
+        var selfLink = 'http://' + req.headers.host + '/api/books/'+returnBook._id;
+        var genreLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
         returnBook.links = {};
-        var newLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
-        returnBook.links.FilterByThisGenre = newLink.replace(' ', '%20');
+        returnBook.links.self = {};
+        returnBook.links.self.href = selfLink;
+
+        returnBook.links.FilterByThisGenre = genreLink.replace(' ', '%20');
+
         res.json(returnBook);
     };
 
@@ -20,6 +25,7 @@ var bookDetailController = function (Book) {
             req.book.author = req.body.author;
             req.book.genre = req.body.genre;
             req.book.read = req.body.read;
+
             req.book.save(function (err) {
                 if (err)
                     res.status(500).send(err);
