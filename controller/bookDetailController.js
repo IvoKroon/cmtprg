@@ -4,11 +4,11 @@ var bookDetailController = function (Book) {
 
         var selfLink = 'http://' + req.headers.host + '/api/books/'+returnBook._id;
         var genreLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
-        returnBook.links = {};
-        returnBook.links.self = {};
-        returnBook.links.self.href = selfLink;
+        returnBook._links = {};
+        returnBook._links.self = {};
+        returnBook._links.self.href = selfLink;
 
-        returnBook.links.FilterByThisGenre = genreLink.replace(' ', '%20');
+        returnBook._links.FilterByThisGenre = genreLink.replace(' ', '%20');
 
         res.json(returnBook);
     };
