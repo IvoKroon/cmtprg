@@ -8,7 +8,13 @@ var routes = function (Book) {
 
     bookRouter.route('/')
         .post(bookController.post)
-        .get(bookController.get);
+        .get(bookController.get)
+        .options(function (req, res) {
+            var option = new Object();
+            option.Get = "Get all the books";
+            option.Post = "Make a new book";
+            res.json(option);
+        });
 
     bookRouter.use('/:bookId', function (req,res,next) {
         Book.findById(req.params.bookId, function (err, book) {
