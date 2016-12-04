@@ -13,7 +13,6 @@ var routes = function (Book) {
             var option = new Object();
             option.Get = "Get all the books";
             option.Post = "Make a new book";
-            // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
             res.setHeader('Allow-header','application/json');
             res.json(option);
         });

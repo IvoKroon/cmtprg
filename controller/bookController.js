@@ -27,13 +27,25 @@ var bookController = function(Book){
                 var returnBooks = [];
                 books.forEach(function (element, index, array) {
                     var newBook = element.toJSON();
-                    newBook.pagination = {};
                     newBook.items = {};
                     newBook._links = {};
                     newBook._links.self = 'http://' + req.headers.host + '/api/books/' + newBook._id;
+                    newBook.pagination = {};
                     returnBooks.push(newBook);
                 });
-                res.json(returnBooks);
+                var items = new Object();
+                items.items = returnBooks;
+                items._links = {};
+                items._links.self = 'http://' + req.headers.host + '/api/books/';
+                items.pagination = {"currentPage":"1"};
+                // <currentPage>1</currentPage>
+                // <currentItems>13</currentItems>
+                // <totalPages>1</totalPages>
+                // <totalItems>13</totalItems>
+                // var items = [returnBooks];
+                // res.items = returnBooks;
+                res.json(items);
+                // res.bla("bla");
         });
     };
 
