@@ -29,7 +29,8 @@ var bookController = function(Book){
                     var newBook = element.toJSON();
                     newBook.items = {};
                     newBook._links = {};
-                    newBook._links.self = 'http://' + req.headers.host + '/api/books/' + newBook._id;
+                    newBook._links.self = {};
+                    newBook._links.self.href = 'http://' + req.headers.host + '/api/books/' + newBook._id;
                     newBook.pagination = {};
                     returnBooks.push(newBook);
                 });
