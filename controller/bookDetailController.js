@@ -13,8 +13,11 @@ var bookDetailController = function (Book) {
         // returnBook._links.self.href = selfLink;
 
         // returnBook._links.FilterByThisGenre = genreLink.replace(' ', '%20');
+        returnBook._links = {};
         returnBook._links.self = {};
         returnBook._links.self.href = selfLink;
+        // returnBook._link.self = {};
+        // returnBook._links.self.href = selfLink;
         res.json(returnBook);
     };
 
