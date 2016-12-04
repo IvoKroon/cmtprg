@@ -4,11 +4,15 @@ var bookDetailController = function (Book) {
 
         var selfLink = 'http://' + req.headers.host + '/api/books/'+returnBook._id;
         var genreLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
-        returnBook._links = {};
-        returnBook._links.self = {};
-        returnBook._links.self.href = selfLink;
+        returnBook._links = [];
+        var href = {"href":selfLink};
+        var links = {"self":href};
+        // var FilterByThisGenre = {};
+        returnBook._links.push(links);
+        // returnBook._links.push(genre);
+        // returnBook._links.self.href = selfLink;
 
-        returnBook._links.FilterByThisGenre = genreLink.replace(' ', '%20');
+        // returnBook._links.FilterByThisGenre = genreLink.replace(' ', '%20');
 
         res.json(returnBook);
     };
