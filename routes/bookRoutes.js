@@ -37,7 +37,8 @@ var routes = function (Book) {
         .get(bookDetailController.get)
         .put(bookDetailController.put)
         .patch(bookDetailController.patch)
-        .delete(bookDetailController.delete);
+        .delete(bookDetailController.delete)
+        .options(bookDetailController.options);
 
     return bookRouter;
 
