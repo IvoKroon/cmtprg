@@ -19,11 +19,22 @@ var bookController = function (Book) {
             if (req.query.genre) {
                 query.genre = req.query.genre;
             }
+            // console.log(req.query);
+            if(req.query.start && req.query.limit){
+                // query.limit(2);
+                // console.log(req.query.start);
+                var limit = parseInt(req.query.limit);
+                console.log(limit);
+
+                Book.find(query).limit(parseInt(limit)).skip(1).exec(function (err, books){console.log(books)});
+            }
+            Book.find().limit(2);
             Book.find(query, function (err, books) {
                 if (err)
                     res.status(500).send(err);
                 else
                     var returnBooks = [];
+
                 books.forEach(function (element, index, array) {
                     var newBook = element.toJSON();
                     newBook.items = {};
@@ -39,32 +50,19 @@ var bookController = function (Book) {
                 items._links = {};
                 items._links.self = {};
                 items._links.self.href = selfLink;
-                items.pagination = {};
 
-                items.pagination.currentPage = 1;
-                items.pagination.currentItems = returnBooks.length;
-                items.pagination.totalPages = 1;
-                items.pagination.totalItems = returnBooks.length;
+                items.pagination = {
+                    currentPage:1,
+                    currentItems:returnBooks.length,
+                    totalPages:1,
+                    totalItems:returnBooks.length
+                };
+
                 items.pagination._links = {};
-                items.pagination._links.first = {};
-                items.pagination._links.first.page = 1;
-                items.pagination._links.first.href = {};
-                items.pagination._links.first.href = selfLink;
-
-                items.pagination._links.last = {};
-                items.pagination._links.last.page = 1;
-                items.pagination._links.last.href = {};
-                items.pagination._links.last.href = selfLink;
-
-                items.pagination._links.previous = {};
-                items.pagination._links.previous.page = 1;
-                items.pagination._links.previous.href = {};
-                items.pagination._links.previous.href = selfLink;
-
-                items.pagination._links.next = {};
-                items.pagination._links.next.page = 1;
-                items.pagination._links.next.href = {};
-                items.pagination._links.next.href = selfLink;
+                items.pagination._links.first = {page:1, href:selfLink};
+                items.pagination._links.last = {page:1, href:selfLink};
+                items.pagination._links.previous = {page:1, href:selfLink};
+                items.pagination._links.next = {page:1, href:selfLink};
 
                 res.json(items);
             });
