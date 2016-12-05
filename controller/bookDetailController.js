@@ -28,7 +28,7 @@ var bookDetailController = function (Book) {
             });
         }else{
             var err = "A field is empty";
-            res.status(304).send(err);
+            res.status(400).send(err);
         }
 
 
