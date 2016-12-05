@@ -34,16 +34,37 @@ var bookController = function (Book) {
                     returnBooks.push(newBook);
                 });
                 var items = new Object();
+                var selfLink = 'http://' + req.headers.host + '/api/books/';
                 items.items = returnBooks;
                 items._links = {};
                 items._links.self = {};
-                items._links.self.href = 'http://' + req.headers.host + '/api/books/';
+                items._links.self.href = selfLink;
                 items.pagination = {};
 
                 items.pagination.currentPage = 1;
                 items.pagination.currentItems = returnBooks.length;
                 items.pagination.totalPages = 1;
                 items.pagination.totalItems = returnBooks.length;
+                items.pagination._links = {};
+                items.pagination._links.first = {};
+                items.pagination._links.first.page = 1;
+                items.pagination._links.first.href = {};
+                items.pagination._links.first.href = selfLink;
+
+                items.pagination._links.last = {};
+                items.pagination._links.last.page = 1;
+                items.pagination._links.last.href = {};
+                items.pagination._links.last.href = selfLink;
+
+                items.pagination._links.previous = {};
+                items.pagination._links.previous.page = 1;
+                items.pagination._links.previous.href = {};
+                items.pagination._links.previous.href = selfLink;
+
+                items.pagination._links.next = {};
+                items.pagination._links.next.page = 1;
+                items.pagination._links.next.href = {};
+                items.pagination._links.next.href = selfLink;
 
                 res.json(items);
             });
