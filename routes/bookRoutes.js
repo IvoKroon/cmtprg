@@ -11,10 +11,10 @@ var routes = function (Book) {
         .get(bookController.get)
         .options(function (req, res) {
             var option = {};
-            console.log(req);
             option.Get = "Get all the books";
             option.Post = "Make a new book";
-            res.setHeader('Allow-header','application/json');
+            res.header('Access-Control-Allow-Methods','POST, GET, OPTIONS');
+            // res.header('Allow-header','application/json');
             res.json(option);
         });
 

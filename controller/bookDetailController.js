@@ -3,8 +3,8 @@ var bookDetailController = function (Book) {
         var returnBook = req.book.toJSON();
 
         var selfLink = 'http://' + req.headers.host + '/api/books/'+returnBook._id;
-        // var genreLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
         var collectionLink = 'http://' + req.headers.host + '/api/books/';
+
         returnBook._links = {};
         returnBook._links.self = {};
         returnBook._links.self.href = selfLink;
@@ -77,6 +77,6 @@ var bookDetailController = function (Book) {
         options:options
     }
 
-}
+};
 
 module.exports = bookDetailController;
