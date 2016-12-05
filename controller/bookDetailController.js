@@ -66,6 +66,7 @@ var bookDetailController = function (Book) {
         options.Put = "Update a part of the resourse";
         options.Delete = "Remove the resourse";
         options.Patch = "Update the full resourse";
+        res.header('Access-Control-Allow-Methods','POST, GET,PUT, OPTIONS');
         res.json(options)
     };
 
