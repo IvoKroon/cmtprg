@@ -17,14 +17,16 @@ var bookController = function(Book){
 
     var get = function (req, res) {
         var query = {};
-        if (req.query.genre) {
-            query.genre = req.query.genre;
-        }
-        Book.find(query, function (err, books) {
-            if (err)
-                res.status(500).send(err);
-            else
-                var returnBooks = [];
+        var acceptsJSON = req.accepts('json');
+        if(req.accepts('json')) {
+            if (req.query.genre) {
+                query.genre = req.query.genre;
+            }
+            Book.find(query, function (err, books) {
+                if (err)
+                    res.status(500).send(err);
+                else
+                    var returnBooks = [];
                 books.forEach(function (element, index, array) {
                     var newBook = element.toJSON();
                     newBook.items = {};
@@ -39,7 +41,7 @@ var bookController = function(Book){
                 items._links = {};
                 items._links.self = {}
                 items._links.self.href = 'http://' + req.headers.host + '/api/books/';
-                items.pagination = {"currentPage":"1"};
+                items.pagination = {"currentPage": "1"};
                 // <currentPage>1</currentPage>
                 // <currentItems>13</currentItems>
                 // <totalPages>1</totalPages>
@@ -48,7 +50,11 @@ var bookController = function(Book){
                 // res.items = returnBooks;
                 res.json(items);
                 // res.bla("bla");
-        });
+            });
+        }else{
+            var err = "Filetype not accepted";
+            res.status(400).send(err);
+        }
     };
 
     return {
