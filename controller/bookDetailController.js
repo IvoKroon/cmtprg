@@ -9,7 +9,7 @@ var bookDetailController = function (Book) {
         returnBook._links.self = {};
         returnBook._links.self.href = selfLink;
         returnBook._links.collection = {};
-        returnBook._links.collection = collectionLink;
+        returnBook._links.collection.href = collectionLink;
         res.json(returnBook);
     };
 
