@@ -65,7 +65,7 @@ var bookController = function (Book) {
                 var previous = 1;
                 var next = 1;
                 if(req.query.start && req.query.limit){
-                    startLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
+                    startLink = 'http://' + req.headers.host + '/api/books/?start=1&limit=' + req.query.limit;
                     lastLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
                     totalPages = Math.ceil(count / parseInt(req.query.limit));
                     currentPage = req.query.start;
