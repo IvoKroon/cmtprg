@@ -60,10 +60,14 @@ var bookController = function (Book) {
                 var startLink = selfLink;
                 var lastLink = selfLink;
                 var totalPages = 0;
+                var currentPage = 1;
+                var currentItems = count;
                 if(req.query.start && req.query.limit){
                     startLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
                     lastLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
                     totalPages = Math.ceil(count / parseInt(req.query.limit));
+                    currentPage = req.query.start;
+                    currentItems = req.query.limit;
                 }else{
                     totalPages = count;
                 }
@@ -75,8 +79,8 @@ var bookController = function (Book) {
 
 
                 items.pagination = {
-                    currentPage:req.query.start,
-                    currentItems:req.query.limit,
+                    currentPage:currentPage.toString(),
+                    currentItems:currentItems.toString(),
                     totalPages:totalPages.toString(),
                     totalItems:count.toString()
                 };
