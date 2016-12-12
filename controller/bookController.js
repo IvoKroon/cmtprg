@@ -62,12 +62,17 @@ var bookController = function (Book) {
                 var totalPages = 0;
                 var currentPage = 1;
                 var currentItems = count;
+                var previous = 1;
+                var next = 1;
                 if(req.query.start && req.query.limit){
                     startLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
                     lastLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
                     totalPages = Math.ceil(count / parseInt(req.query.limit));
                     currentPage = req.query.start;
                     currentItems = req.query.limit;
+                    if(req.query.start != 1){
+                        previous--;
+                    }
                 }else{
                     totalPages = count;
                 }
@@ -85,8 +90,9 @@ var bookController = function (Book) {
                     totalItems:count.toString()
                 };
 
+
                 items.pagination._links = {};
-                items.pagination._links.first = {page:1, href:startLink};
+                items.pagination._links.first = {page:"1", href:startLink};
                 items.pagination._links.last = {page:totalPages.toString(), href:selfLink};
                 items.pagination._links.previous = {page:1, href:selfLink};
                 items.pagination._links.next = {page:1, href:selfLink};
