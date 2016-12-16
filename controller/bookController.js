@@ -72,7 +72,7 @@ var bookController = function (Book) {
                 items.pagination._links = {};
                 items.pagination._links.first = {
                     page: 1,
-                    href: (req.query.limit? selfLink + "?start=" + req.query.start + "&limit=" + req.query.limit : selfLink)
+                    href: (req.query.limit? selfLink + "?start=" + 1 + "&limit=" + req.query.limit : selfLink)
                 };
 
                 items.pagination._links.last = {
