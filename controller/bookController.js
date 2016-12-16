@@ -81,12 +81,12 @@ var bookController = function (Book) {
                 };
 
                 items.pagination._links.previous = {
-                    page: (req.query.start != 1 ? req.query.start - 1 : 1),
+                    page: (req.query.limit? (req.query.start != 1 ? req.query.start - 1 : 1): 1),
                     href:  (req.query.limit ? selfLink + "?start=" + (req.query.start != 1 ? req.query.start - 1: 1) + "&limit=" +req.query.limit: selfLink)
                 };
 
                 items.pagination._links.next = {
-                    page:(req.query.start != totalPages? Number(req.query.start) + 1: totalPages),
+                    page:(req.query.limit? (req.query.start != totalPages? Number(req.query.start) + 1: totalPages): 1),
                     href:(req.query.limit ?
                     selfLink + "?start=" + (req.query.start != totalPages? Number(req.query.start) + 1: totalPages) + "&limit=" + req.query.limit : selfLink)
                 };
