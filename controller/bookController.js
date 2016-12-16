@@ -48,34 +48,14 @@ var bookController = function (Book) {
                     newBook._links = {};
                     newBook._links.self = {};
                     newBook._links.self.href = 'http://' + req.headers.host + '/api/books/' + newBook._id;
-                    // newBook.pagination = {};
                     returnBooks.push(newBook);
                 });
-                Book.find().count(function (err, count) {
-                    console.log(count);
 
-                // console.log(amount);
+                Book.find().count(function (err, count) {
+
                 var items = {};
                 var selfLink = 'http://' + req.headers.host + '/api/books/';
-                var startLink = selfLink;
-                var lastLink = selfLink;
-                var totalPages = 0;
-                var currentPage = 1;
-                var currentItems = count;
-                // var previous = 1;
-                // var next = 1;
-                if(req.query.start && req.query.limit){
-                    startLink = 'http://' + req.headers.host + '/api/books/?start=1&limit=' + req.query.limit;
-                    lastLink = 'http://' + req.headers.host + '/api/books/?start=' + req.query.start + '&limit=' + req.query.limit;
-                    totalPages = Math.ceil(count / parseInt(req.query.limit));
-                    currentPage = req.query.start;
-                    currentItems = req.query.limit;
-                    // if(req.query.start != 1){
-                    //     previous--;
-                    // }
-                }else{
-                    totalPages = count;
-                }
+                var totalPages = (req.query.limit ? Math.ceil(count / parseInt(req.query.limit)) : 1);
 
                 items.items = returnBooks;
                 items._links = {};
@@ -83,24 +63,32 @@ var bookController = function (Book) {
                 items._links.self.href = selfLink;
 
                 items.pagination = {
-                    currentPage:currentPage.toString(),
-                    currentItems:currentItems.toString(),
-                    totalPages:totalPages.toString(),
-                    totalItems:count.toString()
+                    currentPage:(req.query.start? Number(req.query.start): 1),
+                    currentItems:(req.query.limit? Number(req.query.limit): 1),
+                    totalPages:(req.query.limit ? totalPages : 1),
+                    totalItems:count
                 };
 
                 items.pagination._links = {};
-                items.pagination._links.first = {page:"1", href:startLink};
-                items.pagination._links.last = {page:totalPages, href:selfLink};
+                items.pagination._links.first = {
+                    page: 1,
+                    href: (req.query.limit? selfLink + "start=" + req.query.start + "limit=" + req.query.limit : selfLink)
+                };
+
+                items.pagination._links.last = {
+                    page: (req.query.limit ? totalPages : 1),
+                    href:(req.query.limit ? selfLink + "?start=" + totalPages + "&limit=" + req.query.limit : selfLink)
+                };
 
                 items.pagination._links.previous = {
-                    page: (currentPage  != 1 ? currentPage - 1 : 1),
-                    href:selfLink + "?start=" + (currentPage  != 1 ? currentPage - 1 : 1) + "&limit=" + req.query.limit
+                    page: (req.query.start != 1 ? req.query.start - 1 : 1),
+                    href:  (req.query.limit ? selfLink + "?start=" + (req.query.start != 1 ? req.query.start - 1: 1) + "&limit=" +req.query.limit: selfLink)
                 };
 
                 items.pagination._links.next = {
-                    page:(currentPage != totalPages? Number(currentPage) + 1: totalPages),
-                    href:selfLink + "?start=" + (currentPage != totalPages? Number(currentPage) + 1: totalPages) + "&limit=" + req.query.limit
+                    page:(req.query.start != totalPages? Number(req.query.start) + 1: totalPages),
+                    href:(req.query.limit ?
+                    selfLink + "?start=" + (req.query.start != totalPages? Number(req.query.start) + 1: totalPages) + "&limit=" + req.query.limit : selfLink)
                 };
 
                 res.json(items);
