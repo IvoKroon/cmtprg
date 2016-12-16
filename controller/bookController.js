@@ -64,7 +64,7 @@ var bookController = function (Book) {
 
                 items.pagination = {
                     currentPage:(req.query.start? Number(req.query.start): 1),
-                    currentItems:(req.query.limit? Number(req.query.limit): 1),
+                    currentItems:(req.query.limit? Number(req.query.limit): count),
                     totalPages:(req.query.limit ? totalPages : 1),
                     totalItems:count
                 };
