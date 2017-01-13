@@ -1,5 +1,6 @@
 var bookController = function (Book) {
     var post = function (req, res) {
+        // res.setHeader("Access-Control-Allow-Origin", '*');
         var book = new Book(req.body);
         if (!req.body.title) {
             res.status(400);
@@ -15,28 +16,19 @@ var bookController = function (Book) {
 
     var get = function (req, res) {
         var query = {};
-        // console.log(count);
         if (req.accepts('json')) {
             if (req.query.genre) {
                 query.genre = req.query.genre;
             }
-            // console.log(req.query);
-            if(req.query.start && req.query.limit){
-                // query.limit(2);
-                // console.log(req.query.start);
-                var limit = parseInt(req.query.limit);
-                // console.log(limit);
-
-                Book.find(query).limit(parseInt(limit)).skip(1).exec(function (err, books){console.log(books)});
-            }
             var startQuery = Book.find(query);
-            if(req.query.start && req.query.limit){
+            if(req.query.start && req.query.limit ){
                 startQuery.limit(parseInt(req.query.limit));
-                startQuery.skip(parseInt(req.query.start) - 1);
+                if(req.query.start != 1) {
+                    startQuery.skip(parseInt(req.query.start * req.query.limit) - (Number(req.query.limit)));
+                }
             }
 
            startQuery.exec(function (err, books) {
-               // console.log(books);
                 if (err)
                     res.status(500).send(err);
                 else
@@ -90,7 +82,7 @@ var bookController = function (Book) {
                     href:(req.query.limit ?
                     selfLink + "?start=" + (req.query.start != totalPages? Number(req.query.start) + 1: totalPages) + "&limit=" + req.query.limit : selfLink)
                 };
-
+                // res.setHeader("Access-Control-Allow-Origin", '*');
                 res.json(items);
             });
            });

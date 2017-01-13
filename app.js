@@ -22,6 +22,11 @@ var port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 bookRouter = require('./routes/bookRoutes')(Book);
 

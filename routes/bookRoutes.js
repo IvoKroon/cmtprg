@@ -26,7 +26,12 @@ var routes = function (Book) {
                 req.book = book;
                 next();
             }else{
-                res.status(404).send("No book found!");
+                console.log("NO BOOK");
+
+                res.json({error:"No Book Found"});
+                res.status(204);
+                //
+                // res.send();
             }
         })
     });
@@ -35,7 +40,7 @@ var routes = function (Book) {
         .get(bookDetailController.get)
         .put(bookDetailController.put)
         .patch(bookDetailController.patch)
-        .delete(bookDetailController.delete)
+        .delete(bookDetailController.remove)
         .options(bookDetailController.options);
 
     return bookRouter;
@@ -43,3 +48,12 @@ var routes = function (Book) {
 };
 
 module.exports = routes;
+
+// Access-Control-Allow-Origin → *
+// Connection →
+// Connection
+// Options that are desired for the connection
+// keep-alive
+// Date → Fri, 13 Jan 2017 12:13:45 GMT
+// ETag → W/"7-k/B7cg6/fRJGUSVpdhpYBA"
+// X-Powered-By → Express
