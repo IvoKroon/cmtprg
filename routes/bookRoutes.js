@@ -14,6 +14,7 @@ var routes = function (Book) {
             option.Get = "Get all the books";
             option.Post = "Make a new book";
             res.header('Access-Control-Allow-Methods','POST, GET, OPTIONS');
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
             // res.header('Allow-header','application/json');
             res.json(option);
