@@ -55,7 +55,7 @@ var bookDetailController = function (Book) {
             if (err)
                 res.status(500).send(err);
             else {
-                res.status(404).send('Removed');
+                res.status(204).send('Removed');
             }
         });
     };

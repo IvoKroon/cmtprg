@@ -26,12 +26,7 @@ var routes = function (Book) {
                 req.book = book;
                 next();
             }else{
-                console.log("NO BOOK");
-
-                res.json({error:"No Book Found"});
-                res.status(204);
-                //
-                // res.send();
+                res.status(404);
             }
         })
     });
