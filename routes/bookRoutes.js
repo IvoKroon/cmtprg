@@ -19,6 +19,7 @@ var routes = function (Book) {
             // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
             res.header('Allow-header','application/json');
+            res.header('Allow','POST, GET, OPTIONS');
             res.json(option);
         });
 
