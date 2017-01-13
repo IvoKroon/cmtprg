@@ -23,10 +23,11 @@ var routes = function (Book) {
             if (err)
                 res.status(500).send(err);
             else if(book) {
+                console.log("Book found");
                 req.book = book;
                 next();
             }else{
-                res.status(404);
+                res.status(404).send("No book found!");
             }
         })
     });
