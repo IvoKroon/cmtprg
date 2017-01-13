@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ad7705c-c2a4-40f2-9d64-945b6d553e07" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/bookController.js" afterPath="$PROJECT_DIR$/controller/bookController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/bookDetailController.js" afterPath="$PROJECT_DIR$/controller/bookDetailController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/bookRoutes.js" afterPath="$PROJECT_DIR$/routes/bookRoutes.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,21 +33,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bookRoutes.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bookRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/bookRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
+            <state relative-caret-position="75">
               <caret line="15" column="76" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="76" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bookDetailController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bookDetailController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller/bookDetailController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="69" column="3" lean-forward="false" selection-start-line="69" selection-start-column="3" selection-end-line="69" selection-end-column="3" />
+            <state relative-caret-position="345">
+              <caret line="60" column="6" lean-forward="true" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -67,8 +63,8 @@
       <list>
         <option value="$PROJECT_DIR$/controller/alternative.json" />
         <option value="$PROJECT_DIR$/controller/bookController.js" />
-        <option value="$PROJECT_DIR$/controller/bookDetailController.js" />
         <option value="$PROJECT_DIR$/routes/bookRoutes.js" />
+        <option value="$PROJECT_DIR$/controller/bookDetailController.js" />
       </list>
     </option>
   </component>
@@ -264,12 +260,12 @@
       <workItem from="1480858584293" duration="8899000" />
       <workItem from="1481804439893" duration="2581000" />
       <workItem from="1481879182660" duration="4462000" />
-      <workItem from="1484308505500" duration="1889000" />
+      <workItem from="1484308505500" duration="1903000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17831000" />
+    <option name="totallyTimeSpent" value="17845000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -448,18 +444,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/bookDetailController.js">
+    <entry file="file://$PROJECT_DIR$/routes/bookRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="69" column="3" lean-forward="false" selection-start-line="69" selection-start-column="3" selection-end-line="69" selection-end-column="3" />
+        <state relative-caret-position="75">
+          <caret line="15" column="76" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/bookRoutes.js">
+    <entry file="file://$PROJECT_DIR$/controller/bookDetailController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="15" column="76" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="76" />
+        <state relative-caret-position="345">
+          <caret line="60" column="6" lean-forward="true" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
           <folding />
         </state>
       </provider>
